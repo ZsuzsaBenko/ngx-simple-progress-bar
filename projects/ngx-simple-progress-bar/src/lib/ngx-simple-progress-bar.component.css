@@ -1,0 +1,23 @@
+.outer-bar {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inner-bar {
+    height: 100%;
+}
+
+.classic {
+    padding: 2px;
+    border: 1px solid #555555;
+    border-radius: 10px;
+}
+
+.classic .inner-bar {
+    border-radius: 8px;
+}
+
+.rounded, .rounded .inner-bar {
+    border-radius: 10px;
+}
+

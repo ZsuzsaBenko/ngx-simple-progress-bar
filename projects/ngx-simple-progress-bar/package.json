@@ -1,0 +1,17 @@
+{
+    "name": "ngx-simple-progress-bar",
+    "version": "9.0.0",
+    "peerDependencies": {
+        "@angular/common": "^9.1.13",
+        "@angular/core": "^9.1.13"
+    },
+    "dependencies": {
+        "tslib": "^1.10.0"
+    },
+    "keywords": [
+        "angular",
+        "progress",
+        "progress-bar",
+        "loading-bar"
+    ]
+}
