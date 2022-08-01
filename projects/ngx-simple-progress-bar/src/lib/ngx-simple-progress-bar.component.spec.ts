@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgxSimpleProgressBarComponent, ProgressBarType } from './ngx-simple-progress-bar.component';
 import { NgxSimpleProgressBarService, ProgressBarEvent } from './ngx-simple-progress-bar.service';
@@ -8,14 +8,12 @@ describe('NgxSimpleProgressBarComponent', () => {
     let fixture: ComponentFixture<NgxSimpleProgressBarComponent>;
     let template: any;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [NgxSimpleProgressBarComponent]
         })
             .compileComponents();
-    }));
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(NgxSimpleProgressBarComponent);
         component = fixture.componentInstance;
         template = fixture.debugElement.nativeElement;
