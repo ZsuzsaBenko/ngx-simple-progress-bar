@@ -55,7 +55,6 @@
                         "main": "projects/ngx-simple-progress-bar-example/src/main.ts",
                         "polyfills": "projects/ngx-simple-progress-bar-example/src/polyfills.ts",
                         "tsConfig": "projects/ngx-simple-progress-bar-example/tsconfig.app.json",
-                        "aot": true,
                         "assets": [
                             "projects/ngx-simple-progress-bar-example/src/favicon.ico",
                             "projects/ngx-simple-progress-bar-example/src/assets"
@@ -63,7 +62,13 @@
                         "styles": [
                             "projects/ngx-simple-progress-bar-example/src/styles.css"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     },
                     "configurations": {
                         "production": {
@@ -92,8 +97,17 @@
                                     "maximumError": "10kb"
                                 }
                             ]
+                        },
+                        "development": {
+                            "optimization": false,
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "extractLicenses": true,
+                            "vendorChunk": true,
+                            "buildOptimizer": false
                         }
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -103,8 +117,12 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "ngx-simple-progress-bar-example:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "ngx-simple-progress-bar-example:build:development"
                         }
-                    }
+                    },
+                    "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
