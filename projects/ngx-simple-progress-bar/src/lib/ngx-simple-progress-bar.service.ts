@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { interval, Observable, Subject } from 'rxjs';
 
 export class ProgressBarEvent {
@@ -9,16 +9,20 @@ export class ProgressBarEvent {
 @Injectable({
     providedIn: 'root'
 })
-export class NgxSimpleProgressBarService {
-    progressEvent = new Subject<ProgressBarEvent>();
-    private DEFAULT_SPEED = 50;
-    private COMPLETION_SPEED = 5;
-    private MAX_PERCENT = 100;
-    private MIN_PERCENT = 0;
+export class NgxSimpleProgressBarService implements OnDestroy {
+    readonly progressEvent = new Subject<ProgressBarEvent>();
+    private readonly DEFAULT_SPEED = 50;
+    private readonly COMPLETION_SPEED = 5;
+    private readonly MAX_PERCENT = 100;
+    private readonly MIN_PERCENT = 0;
     private percent: number;
     private speed: number;
     private counter: Observable<number>;
     private subscription = null;
+
+    ngOnDestroy(): void {
+        this.stopProgress();
+    }
 
     /**
      * The method launches the progressbar from the specified (or default) initial percentage

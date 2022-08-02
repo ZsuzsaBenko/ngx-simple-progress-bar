@@ -1,7 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgxSimpleProgressBarComponent } from './ngx-simple-progress-bar.component';
-import { CommonModule } from '@angular/common';
-
 
 @NgModule({
     declarations: [NgxSimpleProgressBarComponent],

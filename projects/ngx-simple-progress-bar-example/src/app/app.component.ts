@@ -7,7 +7,7 @@ import { NgxSimpleProgressBarService, ProgressBarType } from 'ngx-simple-progres
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    progressBarTypes: ProgressBarType[];
+    progressBarTypes: Array<ProgressBarType>;
     progressBarType: ProgressBarType;
     color: string;
     backgroundColor: string;

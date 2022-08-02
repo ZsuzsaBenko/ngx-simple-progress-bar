@@ -10,7 +10,7 @@
             "prefix": "lib",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "projects/ngx-simple-progress-bar/tsconfig.lib.json",
                         "project": "projects/ngx-simple-progress-bar/ng-package.json"
@@ -30,14 +30,11 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@angular-eslint/builder:lint",
                     "options": {
-                        "tsConfig": [
-                            "projects/ngx-simple-progress-bar/tsconfig.lib.json",
-                            "projects/ngx-simple-progress-bar/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
+                        "lintFilePatterns": [
+                            "projects/ngx-simple-progress-bar/src/lib/*.ts",
+                            "projects/ngx-simple-progress-bar/src/**/*.html"
                         ]
                     }
                 }
@@ -79,7 +76,6 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
@@ -134,28 +130,12 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@angular-eslint/builder:lint",
                     "options": {
-                        "tsConfig": [
-                            "projects/ngx-simple-progress-bar-example/tsconfig.app.json",
-                            "projects/ngx-simple-progress-bar-example/tsconfig.spec.json",
-                            "projects/ngx-simple-progress-bar-example/e2e/tsconfig.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
+                        "lintFilePatterns": [
+                            "projects/ngx-simple-progress-bar-example/src/app/*.ts",
+                            "projects/ngx-simple-progress-bar-example/src/**/*.html"
                         ]
-                    }
-                },
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "options": {
-                        "protractorConfig": "projects/ngx-simple-progress-bar-example/e2e/protractor.conf.js",
-                        "devServerTarget": "ngx-simple-progress-bar-example:serve"
-                    },
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "ngx-simple-progress-bar-example:serve:production"
-                        }
                     }
                 }
             }
