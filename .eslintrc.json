@@ -61,7 +61,6 @@
                 "@angular-eslint/prefer-output-readonly": "error",
                 "@angular-eslint/use-component-view-encapsulation": "error",
                 "@angular-eslint/use-lifecycle-interface": "error",
-                "@angular-eslint/use-pipe-decorator": "error",
                 "@typescript-eslint/array-type": [
                     "error",
                     {
