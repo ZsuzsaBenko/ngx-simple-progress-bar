@@ -18,15 +18,13 @@ export enum ProgressBarType {
     styleUrls: ['./ngx-simple-progress-bar.component.css']
 })
 export class NgxSimpleProgressBarComponent implements OnInit, OnDestroy {
-    readonly DEFAULT_COLOR = '#4d94f7';
-    readonly DEFAULT_BACKGROUND_COLOR = '#efefef';
+    @Output() readonly percentChange = new EventEmitter<number>();
     @Input() progressBarType = ProgressBarType.CLASSIC;
-    @Input() color = this.DEFAULT_COLOR;
-    @Input() backgroundColor = this.DEFAULT_BACKGROUND_COLOR;
+    @Input() color = '#4d94f7';
+    @Input() backgroundColor = '#efefef';
     @Input() height: string;
     @Input() percent = 0;
     @Input() isStatic = true;
-    @Output() percentChange = new EventEmitter<number>();
     width: string;
     private readonly CLASSIC_HEIGHT = '22px';
     private readonly ROUND_HEIGHT = '12px';
@@ -34,7 +32,7 @@ export class NgxSimpleProgressBarComponent implements OnInit, OnDestroy {
     private progressBarEvents: Observable<ProgressBarEvent> = null;
     private progressBarSubscription: Subscription = null;
 
-    constructor(private progressBarService: NgxSimpleProgressBarService) {
+    constructor(private readonly progressBarService: NgxSimpleProgressBarService) {
     }
 
     ngOnInit(): void {
