@@ -231,6 +231,7 @@
                         }
                     }
                 ],
+                "jsdoc/newline-after-description": "off",
                 "keyword-spacing": [
                     "error",
                     {

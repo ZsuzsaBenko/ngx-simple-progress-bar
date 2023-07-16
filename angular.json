@@ -33,7 +33,7 @@
                     "builder": "@angular-eslint/builder:lint",
                     "options": {
                         "lintFilePatterns": [
-                            "projects/ngx-simple-progress-bar/src/lib/*.ts",
+                            "projects/ngx-simple-progress-bar/src/**/*.ts",
                             "projects/ngx-simple-progress-bar/src/**/*.html"
                         ]
                     }
@@ -151,7 +151,7 @@
                     "builder": "@angular-eslint/builder:lint",
                     "options": {
                         "lintFilePatterns": [
-                            "projects/ngx-simple-progress-bar-example/src/app/*.ts",
+                            "projects/ngx-simple-progress-bar-example/src/**/*.ts",
                             "projects/ngx-simple-progress-bar-example/src/**/*.html"
                         ]
                     }

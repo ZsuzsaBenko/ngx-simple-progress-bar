@@ -29,8 +29,8 @@ export class NgxSimpleProgressBarComponent implements OnInit, OnDestroy {
     private readonly CLASSIC_HEIGHT = '22px';
     private readonly ROUND_HEIGHT = '12px';
     private readonly SQUARE_HEIGHT = '5px';
-    private progressBarEvents: Observable<ProgressBarEvent> = null;
-    private progressBarSubscription: Subscription = null;
+    private progressBarEvents: Observable<ProgressBarEvent> | null = null;
+    private progressBarSubscription: Subscription | null = null;
 
     constructor(private readonly progressBarService: NgxSimpleProgressBarService) {
     }

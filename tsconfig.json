@@ -10,7 +10,8 @@
         "module": "esnext",
         "moduleResolution": "node",
         "importHelpers": true,
-        "target": "es2020",
+        "strictNullChecks": true,
+        "target": "ES2022",
         "lib": [
             "es2018",
             "dom"
@@ -20,7 +21,8 @@
                 "dist/ngx-simple-progress-bar/ngx-simple-progress-bar",
                 "dist/ngx-simple-progress-bar"
             ]
-        }
+        },
+        "useDefineForClassFields": false
     },
     "angularCompilerOptions": {
         "fullTemplateTypeCheck": true,

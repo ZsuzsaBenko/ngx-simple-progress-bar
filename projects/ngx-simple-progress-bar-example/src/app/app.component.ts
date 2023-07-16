@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     }
 
     changeType(barType: string): void {
-        this.progressBarType = this.progressBarTypes.find(type => type === barType);
+        this.progressBarType = this.progressBarTypes.find(type => type === barType) ?? ProgressBarType.CLASSIC;
     }
 
     start(): void {
