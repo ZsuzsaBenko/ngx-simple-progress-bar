@@ -112,14 +112,14 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "ngx-simple-progress-bar-example:build"
+                      "buildTarget": "ngx-simple-progress-bar-example:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "ngx-simple-progress-bar-example:build:production"
+                          "buildTarget": "ngx-simple-progress-bar-example:build:production"
                         },
                         "development": {
-                            "browserTarget": "ngx-simple-progress-bar-example:build:development"
+                          "buildTarget": "ngx-simple-progress-bar-example:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -127,7 +127,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "ngx-simple-progress-bar-example:build"
+                      "buildTarget": "ngx-simple-progress-bar-example:build"
                     }
                 },
                 "test": {

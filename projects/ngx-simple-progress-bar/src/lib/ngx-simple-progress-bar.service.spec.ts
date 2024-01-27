@@ -1,5 +1,6 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NgxSimpleProgressBarService, ProgressBarEvent } from './ngx-simple-progress-bar.service';
+import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
+import { ProgressBarEvent } from './models';
 
 describe('NgxSimpleProgressBarService', () => {
     const minPercent = 0;

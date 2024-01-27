@@ -1,18 +1,21 @@
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProgressBarEvent, ProgressBarType } from './models';
 import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
 
 @Component({
-    selector: 'ngx-simple-progress-bar',
+    selector: 'ngx-simple-progress-bar-standalone',
+    standalone: true,
+    imports: [NgClass, NgStyle],
     template: `
         <div [ngClass]="progressBarType" class="outer-bar" [ngStyle]="{backgroundColor: backgroundColor, height: height}">
             <div class="inner-bar" [ngStyle]="{backgroundColor: color, width: width}"></div>
         </div>
     `,
-    styleUrls: ['./ngx-simple-progress-bar.component.css']
+    styleUrl: './ngx-simple-progress-bar.component.css'
 })
-export class NgxSimpleProgressBarComponent implements OnInit {
+export class NgxSimpleProgressBarStandaloneComponent implements OnInit {
     @Output() readonly percentChange = new EventEmitter<number>();
     @Input() progressBarType = ProgressBarType.CLASSIC;
     @Input() color = '#4d94f7';

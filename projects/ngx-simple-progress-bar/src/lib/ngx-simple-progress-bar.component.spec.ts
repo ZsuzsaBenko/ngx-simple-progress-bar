@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgxSimpleProgressBarComponent, ProgressBarType } from './ngx-simple-progress-bar.component';
-import { NgxSimpleProgressBarService, ProgressBarEvent } from './ngx-simple-progress-bar.service';
+import { NgxSimpleProgressBarComponent } from './ngx-simple-progress-bar.component';
+import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
+import { ProgressBarEvent, ProgressBarType } from './models';
 
 describe('NgxSimpleProgressBarComponent', () => {
     let component: NgxSimpleProgressBarComponent;

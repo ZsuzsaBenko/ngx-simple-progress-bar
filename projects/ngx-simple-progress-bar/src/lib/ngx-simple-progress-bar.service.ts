@@ -1,10 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { interval, Observable, Subject, Subscription } from 'rxjs';
-
-export class ProgressBarEvent {
-    constructor(public percent: number) {
-    }
-}
+import { ProgressBarEvent } from './models';
 
 @Injectable({
     providedIn: 'root'
@@ -15,9 +11,9 @@ export class NgxSimpleProgressBarService implements OnDestroy {
     private readonly COMPLETION_SPEED = 5;
     private readonly MAX_PERCENT = 100;
     private readonly MIN_PERCENT = 0;
-    private percent: number;
-    private speed: number;
-    private counter: Observable<number>;
+    private percent = this.MIN_PERCENT;
+    private speed?: number;
+    private counter?: Observable<number>;
     private subscription: Subscription | null = null;
 
     ngOnDestroy(): void {
@@ -32,7 +28,7 @@ export class NgxSimpleProgressBarService implements OnDestroy {
      * @param speed - the number of milliseconds at which rate our percent is increased by 1; optional, default: 50ms
      */
     startProgress(percent = this.MIN_PERCENT, speed = this.DEFAULT_SPEED): void {
-        this.percent = this.percent ? this.percent : percent;
+        this.percent = this.MIN_PERCENT < this.percent ? this.percent : percent;
         this.speed = speed;
         this.increasePercent();
     }

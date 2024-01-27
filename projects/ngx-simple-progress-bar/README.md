@@ -5,28 +5,24 @@ static progress.
 
 NPM package: [https://www.npmjs.com/package/ngx-simple-progress-bar](https://www.npmjs.com/package/ngx-simple-progress-bar)
 
-
 ### Angular version compatibility
 
 The library's major version is the same as the Angular version it requires, that is,
 e.g. 12.0.0 is for Angular 12 (and upwards). Lowest available version is 9.0.0.
 
-
 ### Installation
 
 `npm install ngx-simple-progress-bar --save`
-
 
 ### Demo app
 
 An example app is available [here](https://zsuzsabenko.github.io/ngx-simple-progress-bar)
 
-
 ### Usage
 
 1. Install the library via npm
 
-2. Import `NgxSimpleProgressBarModule` into your AppModule:
+2. If you use NgModules, import `NgxSimpleProgressBarModule` into your AppModule:
 
         ```
          import { BrowserModule } from '@angular/platform-browser';
@@ -66,7 +62,23 @@ An example app is available [here](https://zsuzsabenko.github.io/ngx-simple-prog
         ```
    Don't forget to set the width of the container div as the full length of the progress bar fits its container.
 
-4. You can inject `NgxSimpleProgressBarService` into your component and use its methods for dynamic loading
+4. From version 17.0.0 upwards (compatible with Angular 17), the progress bar is also available as a standalone component.
+   Use`<ngx-simple-progress-bar-standalone>` in your component's template and customize it exactly the same way as the non-standalone component:
+
+        ```
+        <div class="container">
+            <ngx-simple-progress-bar-standalone [percent]="percent"
+                                                [color]="color"
+                                                [backgroundColor]="backgroundColor"
+                                                [height]="height"
+                                                [progressBarType]="progressBarType"
+                                                [isStatic]="false"
+                                                (percentChange)="onPercentChange($event)">
+            </ngx-simple-progress-bar-standalone>
+        </div>
+        ```
+
+5. You can inject `NgxSimpleProgressBarService` into your component and use its methods for dynamic loading
    functionality:
 
         ```
@@ -136,7 +148,6 @@ You can set the following properties of the progress bar:
   to transparent in order to hide the full length of the progress bar
 
 - **height**: the outer bar's height (defaults: 22px for classic, 12px for rounded, 5px for square)
-
 
 ### NgxSimpleProgressBarService methods
 

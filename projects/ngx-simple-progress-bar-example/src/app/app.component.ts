@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxSimpleProgressBarService, ProgressBarType } from 'ngx-simple-progress-bar';
 
 @Component({
@@ -6,28 +6,17 @@ import { NgxSimpleProgressBarService, ProgressBarType } from 'ngx-simple-progres
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-    progressBarTypes: Array<ProgressBarType>;
-    progressBarType: ProgressBarType;
-    color: string;
-    backgroundColor: string;
-    height: string;
-    percent1: number;
-    percent2: number;
-    private speed: number;
+export class AppComponent {
+    progressBarTypes: Array<ProgressBarType> = Object.values(ProgressBarType);
+    progressBarType: ProgressBarType = ProgressBarType.SQUARE;
+    color = '#9904c2';
+    backgroundColor = '#dcdcdc';
+    height = '3px';
+    percent1 = 45;
+    percent2 = 10;
+    private readonly speed = 100;
 
     constructor(private readonly progressBarService: NgxSimpleProgressBarService) {
-    }
-
-    ngOnInit(): void {
-        this.progressBarTypes = Object.values(ProgressBarType);
-        this.progressBarType = ProgressBarType.SQUARE;
-        this.percent1 = 45;
-        this.percent2 = 10;
-        this.color = '#9904c2';
-        this.backgroundColor = '#dcdcdc';
-        this.height = '3px';
-        this.speed = 100;
     }
 
     changeColor(color: string): void {

@@ -229,15 +229,18 @@
                         "allowShortCircuit": true
                     }
                 ],
-
-
                 "@typescript-eslint/no-use-before-define": "off",
                 "@typescript-eslint/no-var-requires": "off",
                 "@typescript-eslint/prefer-enum-initializers": "error",
                 "@typescript-eslint/prefer-for-of": "error",
                 "@typescript-eslint/prefer-function-type": "error",
                 "@typescript-eslint/prefer-namespace-keyword": "error",
-                "@typescript-eslint/prefer-nullish-coalescing": "error",
+                "@typescript-eslint/prefer-nullish-coalescing": [
+                    "error",
+                    {
+                        "ignoreConditionalTests": true
+                    }
+                ],
                 "@typescript-eslint/prefer-readonly": "error",
                 "@typescript-eslint/promise-function-async": "error",
                 "@typescript-eslint/quotes": [
@@ -249,7 +252,10 @@
                 ],
                 "@typescript-eslint/require-await": "error",
                 "@typescript-eslint/restrict-plus-operands": "error",
-                "@typescript-eslint/semi": ["error", "always"],
+                "@typescript-eslint/semi": [
+                    "error",
+                    "always"
+                ],
                 "@typescript-eslint/triple-slash-reference": [
                     "error",
                     {
@@ -424,7 +430,10 @@
                 "no-var": "error",
                 "no-void": "error",
                 "object-shorthand": "error",
-                "one-var": ["error", "never"],
+                "one-var": [
+                    "error",
+                    "never"
+                ],
                 "padding-line-between-statements": [
                     "off",
                     {
@@ -437,7 +446,10 @@
                 "prefer-const": "error",
                 "prefer-object-spread": "error",
                 "prefer-template": "error",
-                "quote-props": ["error", "as-needed"],
+                "quote-props": [
+                    "error",
+                    "as-needed"
+                ],
                 "quotes": "off",
                 "radix": "error",
                 "require-await": "off",
