@@ -6,7 +6,6 @@ import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
 
 @Component({
     selector: 'ngx-simple-progress-bar-standalone',
-    standalone: true,
     imports: [NgClass, NgStyle],
     template: `
         <div [ngClass]="progressBarType" class="outer-bar" [ngStyle]="{backgroundColor: backgroundColor, height: height}">

@@ -4,7 +4,8 @@ import { NgxSimpleProgressBarService, ProgressBarType } from 'ngx-simple-progres
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
     progressBarTypes: Array<ProgressBarType> = Object.values(ProgressBarType);

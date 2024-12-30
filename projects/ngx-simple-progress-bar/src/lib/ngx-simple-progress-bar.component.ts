@@ -10,7 +10,8 @@ import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
             <div class="inner-bar" [ngStyle]="{backgroundColor: color, width: width}"></div>
         </div>
     `,
-    styleUrls: ['./ngx-simple-progress-bar.component.css']
+    styleUrls: ['./ngx-simple-progress-bar.component.css'],
+    standalone: false
 })
 export class NgxSimpleProgressBarComponent implements OnInit {
     @Output() readonly percentChange = new EventEmitter<number>();
