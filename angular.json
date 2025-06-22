@@ -10,7 +10,7 @@
             "prefix": "lib",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:ng-packagr",
+                    "builder": "@angular/build:ng-packagr",
                     "options": {
                         "tsConfig": "projects/ngx-simple-progress-bar/tsconfig.lib.json",
                         "project": "projects/ngx-simple-progress-bar/ng-package.json"
@@ -22,7 +22,7 @@
                     }
                 },
                 "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
+                    "builder": "@angular/build:karma",
                     "options": {
                         "main": "projects/ngx-simple-progress-bar/src/test.ts",
                         "tsConfig": "projects/ngx-simple-progress-bar/tsconfig.spec.json",
@@ -48,12 +48,16 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular/build:application",
                     "options": {
-                        "outputPath": "dist/ngx-simple-progress-bar-example",
+                        "outputPath": {
+                            "base": "dist/ngx-simple-progress-bar-example",
+                            "browser": ""
+                        },
                         "index": "projects/ngx-simple-progress-bar-example/src/index.html",
-                        "main": "projects/ngx-simple-progress-bar-example/src/main.ts",
-                        "polyfills": "projects/ngx-simple-progress-bar-example/src/polyfills.ts",
+                        "polyfills": [
+                            "projects/ngx-simple-progress-bar-example/src/polyfills.ts"
+                        ],
                         "tsConfig": "projects/ngx-simple-progress-bar-example/tsconfig.app.json",
                         "assets": [
                             "projects/ngx-simple-progress-bar-example/src/favicon.ico",
@@ -63,12 +67,11 @@
                             "projects/ngx-simple-progress-bar-example/src/styles.css"
                         ],
                         "scripts": [],
-                        "vendorChunk": true,
                         "extractLicenses": false,
-                        "buildOptimizer": false,
                         "sourceMap": true,
                         "optimization": false,
-                        "namedChunks": true
+                        "namedChunks": true,
+                        "browser": "projects/ngx-simple-progress-bar-example/src/main.ts"
                     },
                     "configurations": {
                         "production": {
@@ -83,8 +86,6 @@
                             "sourceMap": false,
                             "namedChunks": false,
                             "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
                             "budgets": [
                                 {
                                     "type": "initial",
@@ -102,39 +103,39 @@
                             "optimization": false,
                             "sourceMap": true,
                             "namedChunks": true,
-                            "extractLicenses": true,
-                            "vendorChunk": true,
-                            "buildOptimizer": false
+                            "extractLicenses": true
                         }
                     },
                     "defaultConfiguration": "production"
                 },
                 "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "builder": "@angular/build:dev-server",
                     "options": {
-                      "buildTarget": "ngx-simple-progress-bar-example:build"
+                        "buildTarget": "ngx-simple-progress-bar-example:build"
                     },
                     "configurations": {
                         "production": {
-                          "buildTarget": "ngx-simple-progress-bar-example:build:production"
+                            "buildTarget": "ngx-simple-progress-bar-example:build:production"
                         },
                         "development": {
-                          "buildTarget": "ngx-simple-progress-bar-example:build:development"
+                            "buildTarget": "ngx-simple-progress-bar-example:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "builder": "@angular/build:extract-i18n",
                     "options": {
-                      "buildTarget": "ngx-simple-progress-bar-example:build"
+                        "buildTarget": "ngx-simple-progress-bar-example:build"
                     }
                 },
                 "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
+                    "builder": "@angular/build:karma",
                     "options": {
                         "main": "projects/ngx-simple-progress-bar-example/src/test.ts",
-                        "polyfills": "projects/ngx-simple-progress-bar-example/src/polyfills.ts",
+                        "polyfills": [
+                            "projects/ngx-simple-progress-bar-example/src/polyfills.ts"
+                        ],
                         "tsConfig": "projects/ngx-simple-progress-bar-example/tsconfig.spec.json",
                         "karmaConfig": "projects/ngx-simple-progress-bar-example/karma.conf.js",
                         "assets": [
@@ -157,6 +158,32 @@
                     }
                 }
             }
+        }
+    },
+    "schematics": {
+        "@schematics/angular:component": {
+            "type": "component"
+        },
+        "@schematics/angular:directive": {
+            "type": "directive"
+        },
+        "@schematics/angular:service": {
+            "type": "service"
+        },
+        "@schematics/angular:guard": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:interceptor": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:module": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+            "typeSeparator": "."
         }
     }
 }

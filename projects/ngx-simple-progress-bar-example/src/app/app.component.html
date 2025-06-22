@@ -7,19 +7,19 @@
                 <h4>Classic: </h4>
                 <ngx-simple-progress-bar [percent]="percent1"
                                          [progressBarType]="progressBarTypes[0]"></ngx-simple-progress-bar>
-                <p>{{percent1}}%</p>
+                <p>{{ percent1 }}%</p>
             </div>
             <div class="container">
                 <h4>Rounded: </h4>
                 <ngx-simple-progress-bar [percent]="percent1"
                                          [progressBarType]="progressBarTypes[1]"></ngx-simple-progress-bar>
-                <p>{{percent1}}%</p>
+                <p>{{ percent1 }}%</p>
             </div>
             <div class="container">
                 <h4>Square: </h4>
                 <ngx-simple-progress-bar [percent]="percent1"
                                          [progressBarType]="progressBarTypes[2]"></ngx-simple-progress-bar>
-                <p>{{percent1}}%</p>
+                <p>{{ percent1 }}%</p>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
                                              [isStatic]="false"
                                              (percentChange)="onPercentChange($event)">
                     </ngx-simple-progress-bar>
-                    <p>{{percent2}}%</p>
+                    <p>{{ percent2 }}%</p>
                 </div>
                 <div class="btn-container">
                     <button (click)="start()" class="progressBtn">Start progress</button>
@@ -67,11 +67,12 @@
                 <div class="input-container">
                     <label for="type">Change type: </label>
                     <select id="type" #barType (change)="changeType(barType.value)">
-                        <option [value]="type"
-                                [selected]="type === progressBarType"
-                                *ngFor="let type of progressBarTypes">
-                            {{type}}
-                        </option>
+                        @for (type of progressBarTypes; track type) {
+                            <option [value]="type"
+                                    [selected]="type === progressBarType">
+                                {{ type }}
+                            </option>
+                        }
                     </select>
                 </div>
             </div>
