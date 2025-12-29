@@ -1,43 +1,44 @@
-import { Component } from '@angular/core';
-import { NgxSimpleProgressBarService, ProgressBarType } from 'ngx-simple-progress-bar';
+import { Component, inject, signal } from '@angular/core';
+import { NgxSimpleProgressBarService, NgxSimpleProgressBarStandaloneComponent, ProgressBarType } from 'ngx-simple-progress-bar';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    standalone: false
+    imports: [
+        NgxSimpleProgressBarStandaloneComponent
+    ]
 })
 export class AppComponent {
-    progressBarTypes: Array<ProgressBarType> = Object.values(ProgressBarType);
-    progressBarType: ProgressBarType = ProgressBarType.SQUARE;
-    color = '#9904c2';
-    backgroundColor = '#dcdcdc';
-    height = '3px';
-    percent1 = 45;
-    percent2 = 10;
+    readonly progressBarTypes: Array<ProgressBarType> = Object.values(ProgressBarType);
+    readonly progressBarType = signal(ProgressBarType.SQUARE);
+    readonly color = signal('#9904c2');
+    readonly backgroundColor = signal('#dcdcdc');
+    readonly height = signal('3px');
+    readonly percent = signal(10);
+    readonly constantPercent = 45;
     private readonly speed = 100;
-
-    constructor(private readonly progressBarService: NgxSimpleProgressBarService) {
-    }
+    private readonly progressBarService = inject(NgxSimpleProgressBarService);
 
     changeColor(color: string): void {
-        this.color = color;
+        this.color.set(color);
     }
 
     changeBackgroundColor(bgColor: string): void {
-        this.backgroundColor = bgColor;
+        this.backgroundColor.set(bgColor);
     }
 
     changeHeight(height: string): void {
-        this.height = `${height}px`;
+        this.height.set(`${height}px`);
     }
 
     changeType(barType: string): void {
-        this.progressBarType = this.progressBarTypes.find(type => type === barType) ?? ProgressBarType.CLASSIC;
+        const updatedType = this.progressBarTypes.find(type => type === barType) ?? ProgressBarType.CLASSIC;
+        this.progressBarType.set(updatedType);
     }
 
     start(): void {
-        this.progressBarService.startProgress(this.percent2, this.speed);
+        this.progressBarService.startProgress(this.percent(), this.speed);
     }
 
     stop(): void {
@@ -53,6 +54,6 @@ export class AppComponent {
     }
 
     onPercentChange(changedPercent: number): void {
-        this.percent2 = changedPercent;
+        this.percent.set(changedPercent);
     }
 }

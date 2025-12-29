@@ -5,21 +5,24 @@
         <div class="flex-container">
             <div class="container">
                 <h4>Classic: </h4>
-                <ngx-simple-progress-bar [percent]="percent1"
-                                         [progressBarType]="progressBarTypes[0]"></ngx-simple-progress-bar>
-                <p>{{ percent1 }}%</p>
+                <ngx-simple-progress-bar-standalone [percent]="constantPercent"
+                                                    [progressBarType]="progressBarTypes[0]">
+                </ngx-simple-progress-bar-standalone>
+                <p>{{ constantPercent }}%</p>
             </div>
             <div class="container">
                 <h4>Rounded: </h4>
-                <ngx-simple-progress-bar [percent]="percent1"
-                                         [progressBarType]="progressBarTypes[1]"></ngx-simple-progress-bar>
-                <p>{{ percent1 }}%</p>
+                <ngx-simple-progress-bar-standalone [percent]="constantPercent"
+                                                    [progressBarType]="progressBarTypes[1]">
+                </ngx-simple-progress-bar-standalone>
+                <p>{{ constantPercent }}%</p>
             </div>
             <div class="container">
                 <h4>Square: </h4>
-                <ngx-simple-progress-bar [percent]="percent1"
-                                         [progressBarType]="progressBarTypes[2]"></ngx-simple-progress-bar>
-                <p>{{ percent1 }}%</p>
+                <ngx-simple-progress-bar-standalone [percent]="constantPercent"
+                                                    [progressBarType]="progressBarTypes[2]">
+                </ngx-simple-progress-bar-standalone>
+                <p>{{ constantPercent }}%</p>
             </div>
         </div>
 
@@ -27,15 +30,15 @@
         <div class="flex-container">
             <div class="flex-inner">
                 <div class="container">
-                    <ngx-simple-progress-bar [percent]="percent2"
-                                             [color]="color"
-                                             [backgroundColor]="backgroundColor"
-                                             [height]="height"
-                                             [progressBarType]="progressBarType"
-                                             [isStatic]="false"
-                                             (percentChange)="onPercentChange($event)">
-                    </ngx-simple-progress-bar>
-                    <p>{{ percent2 }}%</p>
+                    <ngx-simple-progress-bar-standalone [percent]="percent()"
+                                                        [color]="color()"
+                                                        [backgroundColor]="backgroundColor()"
+                                                        [height]="height()"
+                                                        [progressBarType]="progressBarType()"
+                                                        [isStatic]="false"
+                                                        (percentChange)="onPercentChange($event)">
+                    </ngx-simple-progress-bar-standalone>
+                    <p>{{ percent() }}%</p>
                 </div>
                 <div class="btn-container">
                     <button (click)="start()" class="progressBtn">Start progress</button>
@@ -48,12 +51,12 @@
             <div class="flex-inner">
                 <div class="input-container">
                     <label for="color">Change color: </label>
-                    <input type="text" id="color" placeholder="'green' or '#008000' or 'rgb(0, 128, 0)'" #colorInput>
+                    <input type="text" id="color" placeholder="green or #008000 or rgb(0, 128, 0)" #colorInput>
                     <button (click)="changeColor(colorInput.value)" class="inputBtn">Change color</button>
                 </div>
                 <div class="input-container">
                     <label for="bg-color">Change background color: </label>
-                    <input type="text" id="bg-color" placeholder="'grey' or '#808080' or 'rgb(128, 128, 128)'"
+                    <input type="text" id="bg-color" placeholder="grey or #808080 or rgb(128, 128, 128)"
                            #bgColorInput>
                     <button (click)="changeBackgroundColor(bgColorInput.value)" class="inputBtn">Change background
                         color
@@ -69,7 +72,7 @@
                     <select id="type" #barType (change)="changeType(barType.value)">
                         @for (type of progressBarTypes; track type) {
                             <option [value]="type"
-                                    [selected]="type === progressBarType">
+                                    [selected]="type === progressBarType()">
                                 {{ type }}
                             </option>
                         }

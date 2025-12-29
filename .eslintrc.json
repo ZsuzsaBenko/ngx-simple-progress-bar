@@ -1,12 +1,6 @@
 {
     "root": true,
     "ignorePatterns": [
-        "*.spec.ts",
-        "environment.*",
-        "main.ts",
-        "polyfills.ts",
-        "projects/**/*",
-        "test.ts"
     ],
     "overrides": [
         {

@@ -1,6 +1,7 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
+import { TestBed } from '@angular/core/testing';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ProgressBarEvent } from './models';
+import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
 
 describe('NgxSimpleProgressBarService', () => {
     const minPercent = 0;
@@ -13,70 +14,75 @@ describe('NgxSimpleProgressBarService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({});
         service = TestBed.inject(NgxSimpleProgressBarService);
-        spyOn(service.progressEvent, 'next');
+        vi.spyOn(service.progressEvent, 'next');
+        vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+        vi.restoreAllMocks();
     });
 
     it('should be created', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should increase percent on startProgress() call with default values', fakeAsync(() => {
+    it('should increase percent on startProgress() call with default values', async () => {
         service.startProgress();
-        tick(defaultSpeed * maxPercent);
+        await vi.advanceTimersByTimeAsync(defaultSpeed * maxPercent);
 
         expect(service.progressEvent.next).toHaveBeenCalledWith(new ProgressBarEvent(maxPercent));
         expect(service.progressEvent.next).toHaveBeenCalledTimes(100);
-    }));
+    });
 
-    it('should increase given initial percent on startProgress() call with default speed', fakeAsync(() => {
+    it('should increase given initial percent on startProgress() call with default speed', async () => {
         service.startProgress(initialPercent);
-        tick(defaultSpeed * (maxPercent - initialPercent));
+        await vi.advanceTimersByTimeAsync(defaultSpeed * (maxPercent - initialPercent));
 
         expect(service.progressEvent.next).toHaveBeenCalledWith(new ProgressBarEvent(maxPercent));
         expect(service.progressEvent.next).toHaveBeenCalledTimes(20);
-    }));
+    });
 
-    it('should increase percent on startProgress() call with custom values', fakeAsync(() => {
+    it('should increase percent on startProgress() call with custom values', async () => {
         service.startProgress(initialPercent, customSpeed);
-        tick(customSpeed * (maxPercent - initialPercent));
+        await vi.advanceTimersByTimeAsync(customSpeed * (maxPercent - initialPercent));
 
         expect(service.progressEvent.next).toHaveBeenCalledWith(new ProgressBarEvent(maxPercent));
         expect(service.progressEvent.next).toHaveBeenCalledTimes(20);
-    }));
+    });
 
-    it('should stop progress on stopProgress() call', fakeAsync(() => {
+    it('should stop progress on stopProgress() call', async () => {
         const counterValueWhenStopped = 10;
         service.startProgress(initialPercent, customSpeed);
-        tick(customSpeed * counterValueWhenStopped);
+        await vi.advanceTimersByTimeAsync(customSpeed * counterValueWhenStopped);
         service.stopProgress();
 
         expect(service.progressEvent.next).toHaveBeenCalledTimes(counterValueWhenStopped);
         expect(service.progressEvent.next)
             .toHaveBeenCalledWith(new ProgressBarEvent(initialPercent + counterValueWhenStopped));
-    }));
+    });
 
-    it('should reset percent to 0% on resetProgress() call', fakeAsync(() => {
+    it('should reset percent to 0% on resetProgress() call', async () => {
         service.startProgress(initialPercent, customSpeed);
-        tick(customSpeed * (maxPercent - initialPercent));
+        await vi.advanceTimersByTimeAsync(customSpeed * (maxPercent - initialPercent));
         expect(service.progressEvent.next).toHaveBeenCalledWith(new ProgressBarEvent(maxPercent));
 
         service.resetProgress();
         expect(service.progressEvent.next).toHaveBeenCalledWith(new ProgressBarEvent(minPercent));
-    }));
+    });
 
-    it('should complete progress to 100% on completeProgress call', fakeAsync(() => {
+    it('should complete progress to 100% on completeProgress call', async () => {
         const counterValueWhenStopped = 10;
         service.startProgress(initialPercent, customSpeed);
-        tick(customSpeed * counterValueWhenStopped);
+        await vi.advanceTimersByTimeAsync(customSpeed * counterValueWhenStopped);
 
         expect(service.progressEvent.next)
             .toHaveBeenCalledWith(new ProgressBarEvent(initialPercent + counterValueWhenStopped));
 
         const completeSpeed = 50;
         service.completeProgress();
-        tick(completeSpeed * (maxPercent - (initialPercent + counterValueWhenStopped)));
+        await vi.advanceTimersByTimeAsync(completeSpeed * (maxPercent - (initialPercent + counterValueWhenStopped)));
 
         expect(service.progressEvent.next).toHaveBeenCalledWith(new ProgressBarEvent(maxPercent));
         expect(service.progressEvent.next).toHaveBeenCalledTimes(maxPercent - initialPercent);
-    }));
+    });
 });

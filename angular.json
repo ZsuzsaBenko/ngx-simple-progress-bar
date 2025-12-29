@@ -18,15 +18,17 @@
                     "configurations": {
                         "production": {
                             "tsConfig": "projects/ngx-simple-progress-bar/tsconfig.lib.prod.json"
+                        },
+                        "test": {
+                            "tsConfig": "projects/ngx-simple-progress-bar/tsconfig.spec.json"
                         }
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "test": {
-                    "builder": "@angular/build:karma",
+                    "builder": "@angular/build:unit-test",
                     "options": {
-                        "main": "projects/ngx-simple-progress-bar/src/test.ts",
-                        "tsConfig": "projects/ngx-simple-progress-bar/tsconfig.spec.json",
-                        "karmaConfig": "projects/ngx-simple-progress-bar/karma.conf.js"
+                        "buildTarget": "ngx-simple-progress-bar:build:test"
                     }
                 },
                 "lint": {
@@ -55,9 +57,6 @@
                             "browser": ""
                         },
                         "index": "projects/ngx-simple-progress-bar-example/src/index.html",
-                        "polyfills": [
-                            "projects/ngx-simple-progress-bar-example/src/polyfills.ts"
-                        ],
                         "tsConfig": "projects/ngx-simple-progress-bar-example/tsconfig.app.json",
                         "assets": [
                             "projects/ngx-simple-progress-bar-example/src/favicon.ico",
@@ -75,12 +74,6 @@
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "projects/ngx-simple-progress-bar-example/src/environments/environment.ts",
-                                    "with": "projects/ngx-simple-progress-bar-example/src/environments/environment.prod.ts"
-                                }
-                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -127,25 +120,6 @@
                     "builder": "@angular/build:extract-i18n",
                     "options": {
                         "buildTarget": "ngx-simple-progress-bar-example:build"
-                    }
-                },
-                "test": {
-                    "builder": "@angular/build:karma",
-                    "options": {
-                        "main": "projects/ngx-simple-progress-bar-example/src/test.ts",
-                        "polyfills": [
-                            "projects/ngx-simple-progress-bar-example/src/polyfills.ts"
-                        ],
-                        "tsConfig": "projects/ngx-simple-progress-bar-example/tsconfig.spec.json",
-                        "karmaConfig": "projects/ngx-simple-progress-bar-example/karma.conf.js",
-                        "assets": [
-                            "projects/ngx-simple-progress-bar-example/src/favicon.ico",
-                            "projects/ngx-simple-progress-bar-example/src/assets"
-                        ],
-                        "styles": [
-                            "projects/ngx-simple-progress-bar-example/src/styles.css"
-                        ],
-                        "scripts": []
                     }
                 },
                 "lint": {

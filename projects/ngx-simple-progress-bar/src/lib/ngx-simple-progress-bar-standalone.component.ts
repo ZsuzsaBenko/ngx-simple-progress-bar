@@ -1,28 +1,27 @@
-import { NgClass, NgStyle } from '@angular/common';
-import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, model, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProgressBarEvent, ProgressBarType } from './models';
 import { NgxSimpleProgressBarService } from './ngx-simple-progress-bar.service';
 
 @Component({
     selector: 'ngx-simple-progress-bar-standalone',
-    imports: [NgClass, NgStyle],
     template: `
-        <div [ngClass]="progressBarType" class="outer-bar" [ngStyle]="{backgroundColor: backgroundColor, height: height}">
-            <div class="inner-bar" [ngStyle]="{backgroundColor: color, width: width}"></div>
+        <div [class]="progressBarType()" class="outer-bar" [style]="{backgroundColor: backgroundColor(), height: resolvedHeight()}">
+            <div class="inner-bar" [style]="{backgroundColor: color(), width: width()}"></div>
         </div>
     `,
-    styleUrl: './ngx-simple-progress-bar.component.css'
+    styleUrl: './ngx-simple-progress-bar.component.css',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxSimpleProgressBarStandaloneComponent implements OnInit {
-    @Output() readonly percentChange = new EventEmitter<number>();
-    @Input() progressBarType = ProgressBarType.CLASSIC;
-    @Input() color = '#4d94f7';
-    @Input() backgroundColor = '#efefef';
-    @Input() height!: string;
-    @Input() percent = 0;
-    @Input() isStatic = true;
-    width!: string;
+    progressBarType = input<ProgressBarType>(ProgressBarType.CLASSIC);
+    color = input<string>('#4d94f7');
+    backgroundColor = input<string>('#efefef');
+    height = input<string>('');
+    percent = model<number>(0);
+    isStatic = input<boolean>(true);
+    width = computed<string>(() => `${this.percent()}%`);
+    resolvedHeight = computed<string>(() => this.setHeight());
     private readonly CLASSIC_HEIGHT = '22px';
     private readonly ROUND_HEIGHT = '12px';
     private readonly SQUARE_HEIGHT = '5px';
@@ -30,22 +29,20 @@ export class NgxSimpleProgressBarStandaloneComponent implements OnInit {
     private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
     ngOnInit(): void {
-        this.width = `${this.percent}%`;
-        this.setHeight();
-        if (!this.isStatic) {
+        if (!this.isStatic()) {
             this.observeProgressBarEvents();
         }
     }
 
-    private setHeight(): void {
-        if (this.height) {
-            return;
-        } else if (ProgressBarType.CLASSIC === this.progressBarType) {
-            this.height = this.CLASSIC_HEIGHT;
-        } else if (ProgressBarType.ROUNDED === this.progressBarType) {
-            this.height = this.ROUND_HEIGHT;
+    private setHeight(): string {
+        if (this.height()) {
+            return this.height();
+        } else if (ProgressBarType.CLASSIC === this.progressBarType()) {
+            return this.CLASSIC_HEIGHT;
+        } else if (ProgressBarType.ROUNDED === this.progressBarType()) {
+            return this.ROUND_HEIGHT;
         } else {
-            this.height = this.SQUARE_HEIGHT;
+            return this.SQUARE_HEIGHT;
         }
     }
 
@@ -53,9 +50,7 @@ export class NgxSimpleProgressBarStandaloneComponent implements OnInit {
         this.progressBarService.progressEvent.asObservable()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((event: ProgressBarEvent) => {
-                this.percent = event.percent;
-                this.width = `${this.percent}%`;
-                this.percentChange.emit(this.percent);
+                this.percent.set(event.percent);
             });
     }
 }
