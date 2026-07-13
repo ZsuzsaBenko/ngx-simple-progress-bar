@@ -1,9 +1,9 @@
 {
     "name": "ngx-simple-progress-bar",
-    "version": "21.0.0",
+    "version": "22.0.0",
     "peerDependencies": {
-        "@angular/common": "^21.0.0",
-        "@angular/core": "^21.0.0",
+        "@angular/common": "^22.0.0",
+        "@angular/core": "^22.0.0",
         "rxjs": "^7.4.0"
     },
     "dependencies": {
